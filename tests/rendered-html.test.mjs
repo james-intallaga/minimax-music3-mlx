@@ -13,7 +13,7 @@ test("ships the complete local music experience", async () => {
   ]);
 
   assert.match(layout, /MiniMax Music 3 · MLX/);
-  assert.match(page, /Make a song/);
+  assert.match(page, /Freedom To Download Your Song/);
   assert.match(page, /durationOptions = \[60, 120, 180, 300\]/);
   assert.match(page, /Download WAV/);
   assert.match(page, /MiniMax‑Music3 · open weights · fully local/);

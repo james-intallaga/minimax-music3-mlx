@@ -336,7 +336,7 @@ export default function Home() {
       {!modelReady ? <SetupGate engine={engine} error={error} onInstall={() => void downloadModel()} onRetry={() => void refreshStatus()} /> : <>
         <section className="hero" id="top">
           <div className="eyebrow">MiniMax‑Music3 · open weights · fully local</div>
-          <h1>Make a song</h1>
+          <h1>Freedom To Download Your Song</h1>
           <p>Apple Silicon Mac · 64 GB supported · 48 GB experimental</p>
         </section>
 
