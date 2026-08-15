@@ -1,6 +1,6 @@
 # MiniMax Music 3 MLX
 
-An independent, open-source app for generating complete songs locally on an Apple Silicon Mac with MiniMax‑Music3 and MLX.
+Freedom To Download Your Song. An independent, open-source app for generating complete songs locally on an Apple Silicon Mac with MiniMax‑Music3 and MLX.
 
 ## Start
 
