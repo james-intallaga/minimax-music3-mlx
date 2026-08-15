@@ -5,9 +5,10 @@ An independent, open-source app for generating complete songs locally on an Appl
 ## Start
 
 1. Download this repository.
-2. Open Terminal in the project folder and run:
+2. Open Terminal and run these commands, replacing the example path with your downloaded folder:
 
    ```sh
+   cd "/path/to/minimax-music3-mlx"
    ./setup-local.sh
    ```
 
