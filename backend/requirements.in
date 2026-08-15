@@ -1,0 +1,10 @@
+fastapi==0.141.1
+uvicorn[standard]==0.52.3
+mlx==0.32.0
+mlx-lm==0.31.3
+numpy==2.5.2
+scipy==1.18.0
+safetensors==0.8.0
+transformers==5.15.0
+huggingface-hub==1.27.0
+mlx-whisper==0.4.3

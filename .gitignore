@@ -1,0 +1,16 @@
+node_modules/
+.next/
+.vinext/
+.wrangler/
+dist/
+.venv/
+data/
+model/
+engine/**/__pycache__/
+backend/**/__pycache__/
+tests/**/__pycache__/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
