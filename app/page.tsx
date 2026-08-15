@@ -241,7 +241,7 @@ function SongPlayer({ song }: { song: Song }) {
           ))}
         </div>
       )}
-      <a className="player-download" href={`${API}${song.audio_url}`} download><Icon name="download" size={18} /> Download WAV</a>
+      <a className="player-download" href={`${API}${song.audio_url}`} download><Icon name="download" size={20} /> Download your song</a>
     </section>
   );
 }

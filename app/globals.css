@@ -197,8 +197,9 @@ textarea:focus { border-color: rgba(30,215,96,.55); box-shadow: 0 0 0 4px rgba(3
 .synced-lyrics button.is-section { padding-top: 13px; color: var(--pink); font-size: 10px; font-weight: 560; text-transform: uppercase; letter-spacing: .14em; }
 .synced-lyrics button.is-past:not(.is-section) { color: rgba(20,20,20,.2); transform: translateY(-1px); }
 .synced-lyrics button.is-active:not(.is-section) { color: var(--ink); font-size: clamp(20px, 2.6vw, 27px); font-weight: 390; }
-.player-download { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; padding: 10px 14px; border-radius: 99px; color: var(--ink); text-decoration: none; font-size: 11px; }
-.player-download:hover { background: rgba(20,20,20,.04); }
+.player-download { width: 100%; max-width: 340px; min-height: 57px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-top: 24px; padding: 0 24px; border-radius: 99px; background: var(--accent); color: #092513; text-decoration: none; font-size: 15px; font-weight: 580; box-shadow: 0 12px 28px rgba(30,215,96,.2); transition: transform .18s ease, box-shadow .18s ease; }
+.player-download:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(30,215,96,.28); }
+.player-download:active { transform: translateY(0) scale(.98); }
 
 .generation-view { padding-top: 18px; }
 .generation-view .player-vinyl { width: min(260px, 62vw); }

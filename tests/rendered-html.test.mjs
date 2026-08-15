@@ -15,7 +15,7 @@ test("ships the complete local music experience", async () => {
   assert.match(layout, /MiniMax Music 3 · MLX/);
   assert.match(page, /Freedom To Download Your Song/);
   assert.match(page, /durationOptions = \[60, 120, 180, 300\]/);
-  assert.match(page, /Download WAV/);
+  assert.match(page, /Download your song/);
   assert.match(page, /MiniMax‑Music3 · open weights · fully local/);
   assert.match(page, /onTimeUpdate/);
   assert.match(page, /synced-lyrics/);
