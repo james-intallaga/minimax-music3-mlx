@@ -2,8 +2,8 @@ import type { NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const ENGINE_ORIGIN = process.env.AMMA_ENGINE_ORIGIN ?? "http://127.0.0.1:7860";
-const WEB_ORIGIN = process.env.AMMA_WEB_ORIGIN ?? "http://127.0.0.1:3000";
+const ENGINE_ORIGIN = process.env.MINIMAX_MUSIC3_ENGINE_ORIGIN ?? "http://127.0.0.1:7860";
+const WEB_ORIGIN = process.env.MINIMAX_MUSIC3_WEB_ORIGIN ?? "http://127.0.0.1:3000";
 
 function requestIsLocal(request: NextRequest) {
   const fetchSite = request.headers.get("sec-fetch-site");
@@ -17,9 +17,9 @@ async function forward(request: NextRequest, context: { params: Promise<{ path: 
     return Response.json({ detail: "Cross-site requests are not allowed." }, { status: 403 });
   }
 
-  const token = process.env.AMMA_LOCAL_TOKEN;
+  const token = process.env.MINIMAX_MUSIC3_LOCAL_TOKEN;
   if (!token) {
-    return Response.json({ detail: "Start the app with Open amma.live Music.command." }, { status: 503 });
+    return Response.json({ detail: "Start the app with Open MiniMax Music 3.command." }, { status: 503 });
   }
 
   const { path } = await context.params;

@@ -1,6 +1,6 @@
-# Make music on your Mac with amma.live
+# Make music locally with MiniMax Music 3 MLX
 
-This app makes music on your own Apple Silicon Mac. Your description, lyrics, model, and finished audio stay on your computer. You do not need an amma.live account, subscription, API key, or cloud storage.
+This app makes music on your own Apple Silicon Mac. Your description, lyrics, model, and finished audio stay on your computer. You do not need an account, subscription, API key, or cloud storage.
 
 ## Before you begin
 
@@ -8,9 +8,9 @@ You need a Mac with Apple Silicon and **64 GB of memory** for supported use. A 4
 
 ## Open the app
 
-Double-click **Open amma.live Music.command**. The first launch prepares the app, which can take several minutes. Keep the Terminal window open; closing it safely stops the private local music engine.
+Double-click **Open MiniMax Music 3.command**. The first launch prepares the app, which can take several minutes. Keep the Terminal window open; closing it safely stops the private local music engine.
 
-If another local app is already using the required address, amma.live Music tells you which app to close instead of opening the wrong page.
+If another local app is already using the required address, MiniMax Music 3 tells you which app to close instead of opening the wrong page.
 
 ## Download the model once
 

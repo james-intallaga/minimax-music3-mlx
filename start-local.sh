@@ -19,7 +19,7 @@ node_supported() {
 
 find_node() {
   local candidate
-  for candidate in "${AMMA_NODE_BIN:-}" "$(command -v node 2>/dev/null || true)" /opt/homebrew/bin/node /usr/local/bin/node; do
+  for candidate in "${MINIMAX_MUSIC3_NODE_BIN:-}" "$(command -v node 2>/dev/null || true)" /opt/homebrew/bin/node /usr/local/bin/node; do
     if [[ -n "${candidate}" && -x "${candidate}" ]] && node_supported "${candidate}"; then
       echo "${candidate}"
       return 0
@@ -42,9 +42,9 @@ port_owner() {
 for port in "${WEB_PORT}" "${API_PORT}"; do
   owner="$(port_owner "${port}")"
   if [[ -n "${owner}" ]]; then
-    echo "amma.live Music cannot start because local port ${port} is already in use:"
+    echo "MiniMax Music 3 cannot start because local port ${port} is already in use:"
     echo "${owner}"
-    echo "Close that app and open amma.live Music again."
+    echo "Close that app and open MiniMax Music 3 again."
     exit 1
   fi
 done
@@ -83,16 +83,16 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-export AMMA_LOCAL_TOKEN="$("${PYTHON_BIN}" -c 'import secrets; print(secrets.token_hex(32))')"
-export AMMA_WEB_ORIGIN="http://${WEB_HOST}:${WEB_PORT}"
-export AMMA_ENGINE_ORIGIN="http://${API_HOST}:${API_PORT}"
+export MINIMAX_MUSIC3_LOCAL_TOKEN="$("${PYTHON_BIN}" -c 'import secrets; print(secrets.token_hex(32))')"
+export MINIMAX_MUSIC3_WEB_ORIGIN="http://${WEB_HOST}:${WEB_PORT}"
+export MINIMAX_MUSIC3_ENGINE_ORIGIN="http://${API_HOST}:${API_PORT}"
 
 cd "${APP_DIR}"
 "${PYTHON_BIN}" -m uvicorn backend.main:app --host "${API_HOST}" --port "${API_PORT}" --no-server-header &
 API_PID=$!
 
 for attempt in {1..40}; do
-  if /usr/bin/curl --silent --fail --header "Authorization: Bearer ${AMMA_LOCAL_TOKEN}" "${AMMA_ENGINE_ORIGIN}/api/status" >/dev/null; then
+  if /usr/bin/curl --silent --fail --header "Authorization: Bearer ${MINIMAX_MUSIC3_LOCAL_TOKEN}" "${MINIMAX_MUSIC3_ENGINE_ORIGIN}/api/status" >/dev/null; then
     break
   fi
   if ! kill -0 "${API_PID}" 2>/dev/null; then
@@ -106,8 +106,8 @@ done
 WEB_PID=$!
 
 for attempt in {1..40}; do
-  if /usr/bin/curl --silent --fail "${AMMA_WEB_ORIGIN}" >/dev/null; then
-    open "${AMMA_WEB_ORIGIN}"
+  if /usr/bin/curl --silent --fail "${MINIMAX_MUSIC3_WEB_ORIGIN}" >/dev/null; then
+    open "${MINIMAX_MUSIC3_WEB_ORIGIN}"
     break
   fi
   if ! kill -0 "${WEB_PID}" 2>/dev/null; then
@@ -117,12 +117,12 @@ for attempt in {1..40}; do
   sleep 0.25
 done
 
-echo "amma.live Music is running privately at ${AMMA_WEB_ORIGIN}"
+echo "MiniMax Music 3 is running privately at ${MINIMAX_MUSIC3_WEB_ORIGIN}"
 echo "Close this window or press Control-C to stop it."
 
 while kill -0 "${API_PID}" 2>/dev/null && kill -0 "${WEB_PID}" 2>/dev/null; do
   sleep 1
 done
 
-echo "One part of amma.live Music stopped. Closing the local app safely."
+echo "One part of MiniMax Music 3 stopped. Closing the local app safely."
 exit 1

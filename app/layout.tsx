@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "amma.live — Make music on your Mac",
+  title: "MiniMax Music 3 · MLX",
   description: "Create complete songs with synced lyrics, privately and locally on Apple Silicon with MiniMax-Music3.",
   icons: {
     icon: "/amma-live-icon.png",

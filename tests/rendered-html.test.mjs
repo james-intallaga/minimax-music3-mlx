@@ -12,7 +12,7 @@ test("ships the complete local music experience", async () => {
     readFile(new URL("backend/main.py", projectRoot), "utf8"),
   ]);
 
-  assert.match(layout, /amma\.live/);
+  assert.match(layout, /MiniMax Music 3 · MLX/);
   assert.match(page, /Make a song/);
   assert.match(page, /durationOptions = \[60, 120, 180, 300\]/);
   assert.match(page, /Download WAV/);
@@ -29,8 +29,10 @@ test("ships the complete local music experience", async () => {
   assert.match(backend, /word_timestamps=True/);
 });
 
-test("contains no hosted amma.live integration", async () => {
+test("keeps amma.live separate from the local app", async () => {
   const page = await readFile(new URL("app/page.tsx", projectRoot), "utf8");
   assert.doesNotMatch(page, /api\.amma\.live|stripe|analytics|supabase/i);
+  assert.match(page, />amma\.live<\/span>/);
+  assert.match(page, /Mac not supported\? Try amma\.live/);
   assert.match(page, /API = "\/api\/local"/);
 });

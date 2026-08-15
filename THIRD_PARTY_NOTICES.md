@@ -19,7 +19,3 @@ The turntable/tonearm visual was adapted from the “Turntable” icon in the Pu
 - License: Creative Commons Attribution 3.0 Unported
 - License text: https://creativecommons.org/licenses/by/3.0/
 - Changes: redrawn as responsive CSS shapes, simplified, recolored, animated, and the cartridge/head portion removed
-
-## amma.live branding
-
-`public/amma-live-icon.png`, the amma.live name, and related brand presentation are brand identifiers. Their inclusion does not grant trademark rights under the MIT software license. Forks may replace the icon and name with their own branding.

@@ -26,8 +26,8 @@ from pydantic import BaseModel, Field
 APP_ROOT = Path(__file__).resolve().parents[1]
 ENGINE_ROOT = Path(os.environ.get("MINIMAX_MUSIC3_HOME", APP_ROOT / "engine")).resolve()
 CHECKPOINT = Path(os.environ.get("MINIMAX_MUSIC3_CHECKPOINT", APP_ROOT / "model" / "MiniMax-Music3")).resolve()
-WHISPER_CHECKPOINT = Path(os.environ.get("AMMA_WHISPER_CHECKPOINT", APP_ROOT / "model" / "whisper-large-v3-turbo")).resolve()
-DATA_ROOT = Path(os.environ.get("AMMA_LOCAL_DATA", APP_ROOT / "data")).resolve()
+WHISPER_CHECKPOINT = Path(os.environ.get("MINIMAX_MUSIC3_WHISPER_CHECKPOINT", APP_ROOT / "model" / "whisper-large-v3-turbo")).resolve()
+DATA_ROOT = Path(os.environ.get("MINIMAX_MUSIC3_DATA", APP_ROOT / "data")).resolve()
 SONGS_ROOT = DATA_ROOT / "songs"
 INDEX_PATH = DATA_ROOT / "songs.json"
 REQUIRED_COMPONENTS = (
@@ -42,13 +42,13 @@ MUSIC_MODEL_REPO = "MiniMaxAI/MiniMax-Music3"
 MUSIC_MODEL_REVISION = "fbdf52fbaaca799592917417eb05f1899f1255ec"
 WHISPER_MODEL_REPO = "mlx-community/whisper-large-v3-turbo"
 WHISPER_MODEL_REVISION = "a4aaeec0636e6fef84abdcbe3544cb2bf7e9f6fb"
-LOCAL_API_TOKEN = os.environ.get("AMMA_LOCAL_TOKEN", "")
-logger = logging.getLogger("amma.local")
+LOCAL_API_TOKEN = os.environ.get("MINIMAX_MUSIC3_LOCAL_TOKEN", "")
+logger = logging.getLogger("minimax_music3.local")
 
 DATA_ROOT.mkdir(parents=True, exist_ok=True)
 SONGS_ROOT.mkdir(parents=True, exist_ok=True)
 
-app = FastAPI(title="amma.live local music", docs_url=None, redoc_url=None)
+app = FastAPI(title="MiniMax Music 3 MLX", docs_url=None, redoc_url=None)
 
 
 @app.middleware("http")
@@ -468,7 +468,7 @@ def create_generation(request: GenerationRequest) -> dict[str, Any]:
             "started_monotonic": time.monotonic(),
             "request": request.model_dump(),
         }
-        thread = threading.Thread(target=run_generation, args=(job_id, request), daemon=True, name="amma-local-generation")
+        thread = threading.Thread(target=run_generation, args=(job_id, request), daemon=True, name="music3-local-generation")
         thread.start()
         return public_job(current_job) or {}
 
@@ -489,7 +489,7 @@ def download_model() -> dict[str, str]:
         return {"message": "The model is already installed."}
     if model_download["running"]:
         return {"message": model_download["message"]}
-    threading.Thread(target=run_model_download, daemon=True, name="amma-model-download").start()
+    threading.Thread(target=run_model_download, daemon=True, name="music3-model-download").start()
     return {"message": "Model download started."}
 
 
@@ -505,4 +505,4 @@ def media(filename: str):
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"name": "amma.live local music", "status": "ready"}
+    return {"name": "MiniMax Music 3 MLX", "status": "ready"}

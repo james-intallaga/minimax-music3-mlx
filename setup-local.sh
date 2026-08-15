@@ -15,7 +15,7 @@ node_supported() {
 
 find_node() {
   local candidate
-  for candidate in "${AMMA_NODE_BIN:-}" "$(command -v node 2>/dev/null || true)" /opt/homebrew/bin/node /usr/local/bin/node; do
+  for candidate in "${MINIMAX_MUSIC3_NODE_BIN:-}" "$(command -v node 2>/dev/null || true)" /opt/homebrew/bin/node /usr/local/bin/node; do
     if [[ -n "${candidate}" && -x "${candidate}" ]] && node_supported "${candidate}"; then
       echo "${candidate}"
       return 0
@@ -42,4 +42,4 @@ fi
 
 npm ci
 npm run build
-echo "Setup complete. Double-click Open amma.live Music.command or run ./start-local.sh"
+echo "Setup complete. Double-click Open MiniMax Music 3.command or run ./start-local.sh"

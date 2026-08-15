@@ -119,7 +119,7 @@ function SetupGate({ engine, error, onInstall, onRetry }: { engine: EngineStatus
         {checking && "This only takes a moment."}
         {downloading && "The music model is downloading directly to this Mac. You only do this once."}
         {!checking && !downloading && !error && "Download the music model once. After that, you can make songs privately on this Mac without an account or subscription."}
-        {error && "Keep the amma.live Music window open, then try again."}
+        {error && "Keep the local app window open, then try again."}
       </p>
 
       {downloading && (
@@ -147,7 +147,7 @@ async function readJson<T>(path: string, options?: RequestInit): Promise<T> {
   return body as T;
 }
 
-function AmmaPlayer({ song }: { song: Song }) {
+function SongPlayer({ song }: { song: Song }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const lineRefs = useRef(new Map<number, HTMLButtonElement>());
   const [currentTime, setCurrentTime] = useState(0);
@@ -179,7 +179,7 @@ function AmmaPlayer({ song }: { song: Song }) {
   }
 
   return (
-    <section className="amma-player" aria-label={`Playing ${song.title}`}>
+    <section className="song-player" aria-label={`Playing ${song.title}`}>
       <audio
         ref={audioRef}
         src={`${API}${song.audio_url}`}
@@ -374,7 +374,7 @@ export default function Home() {
               <div className="generation-meta"><span>{Math.round(generation.progress * 100)}%</span><span>{formatWait(generation.eta_seconds)}</span></div>
               <button className="stop-button" onClick={cancelSong}><Icon name="stop" size={20} /> Stop making this song</button>
             </section>
-          ) : activeSong ? <AmmaPlayer key={activeSong.id} song={activeSong} /> : (
+          ) : activeSong ? <SongPlayer key={activeSong.id} song={activeSong} /> : (
             <section className="empty-player"><div className="player-vinyl"><img src="/amma-live-icon.png" alt="" /><span /></div><h2>Your song will appear here.</h2></section>
           )}
 
@@ -392,11 +392,11 @@ export default function Home() {
             <li><span>4</span><div><strong>Press Create and leave the page open.</strong><p>Your Mac does all the work. Longer songs take longer, and the progress bar shows what is happening.</p></div></li>
             <li><span>5</span><div><strong>Listen and save it.</strong><p>Lyrics follow the music automatically. Download the finished WAV whenever you are happy.</p></div></li>
           </ol>
-          <p className="privacy-note">Nothing is uploaded to amma.live. Your prompt, lyrics, model, and finished songs stay on this computer.</p>
+          <p className="privacy-note">Your prompt, lyrics, model, and finished songs stay on this computer.</p>
         </section>
       </>}
 
-      <footer><a className="footer-brand" href="https://amma.live" target="_blank" rel="noreferrer"><img src="/amma-live-icon.png" alt="" /><strong>amma.live</strong></a><p>MIT open-source app · MiniMax open-weight model · songs stay local.</p><button onClick={refreshStatus}>Check engine</button></footer>
+      <footer><p>MIT open-source app · songs stay local.</p><a className="hosted-option" href="https://amma.live" target="_blank" rel="noreferrer">Mac not supported? Try amma.live</a><button onClick={refreshStatus}>Check engine</button></footer>
     </main>
   );
 }
