@@ -1,4 +1,6 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from fastapi.testclient import TestClient
 from pydantic import ValidationError
@@ -35,6 +37,22 @@ class LocalEngineTests(unittest.TestCase):
 
     def test_word_normalization_handles_curly_apostrophes(self):
         self.assertEqual(normalized_words("We’ll stay"), ["we'll", "stay"])
+
+    def test_download_progress_counts_incomplete_model_files(self):
+        original_checkpoint = main.CHECKPOINT
+        original_whisper = main.WHISPER_CHECKPOINT
+        try:
+            with TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                main.CHECKPOINT = root / "music"
+                main.WHISPER_CHECKPOINT = root / "whisper"
+                incomplete = main.CHECKPOINT / ".cache" / "download" / "weights.incomplete"
+                incomplete.parent.mkdir(parents=True)
+                incomplete.write_bytes(b"x" * 1024)
+                self.assertEqual(main.installed_bytes(), 1024)
+        finally:
+            main.CHECKPOINT = original_checkpoint
+            main.WHISPER_CHECKPOINT = original_whisper
 
     def test_engine_rejects_requests_without_launch_token(self):
         original = main.LOCAL_API_TOKEN

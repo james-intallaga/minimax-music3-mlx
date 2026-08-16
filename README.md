@@ -26,10 +26,18 @@ Later, you only need to run `./start-local.sh`. On a Mac, you can also double-cl
 
 - Apple Silicon Mac and macOS 14 or newer
 - 64 GB unified memory for supported use; 48 GB is experimental
-- About 42 GB of free storage
+- About 60 GB of free storage
 - Node.js 20.9 or newer and Python 3.12
 
 The current full-precision pipeline does not support 32–36 GB Macs. Five-minute songs are supported; generation may take tens of minutes.
+
+## How it works
+
+![How MiniMax Music 3 MLX makes a song](docs/minimax-music3-workflow.png)
+
+- **MiniMax‑Music3** supplies the tokenizer, customized Qwen3 language model, RVQ depth decoder, condition encoder, flow transformer, and vocoder. Together they turn your description and lyrics into a 44.1 kHz stereo song.
+- **Whisper Large V3 Turbo** listens to the finished song locally and aligns each lyric line with the audio.
+- **MLX** runs the complete inference pipeline in unified memory on Apple Silicon. After the one-time model download, generation, lyric syncing, playback, and storage stay on your Mac.
 
 ## This project and amma.live
 

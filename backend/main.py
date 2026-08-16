@@ -82,7 +82,7 @@ cancel_event = threading.Event()
 current_job: dict[str, Any] | None = None
 pipeline_instance = None
 model_download: dict[str, Any] = {"running": False, "message": ""}
-DOWNLOAD_TOTAL_GB = 28.1
+DOWNLOAD_TOTAL_GB = 55.0
 
 
 def now_iso() -> str:
@@ -120,7 +120,7 @@ def installed_bytes() -> int:
         if not root.exists():
             continue
         for path in root.rglob("*"):
-            if not path.is_file() or ".cache" in path.parts:
+            if not path.is_file():
                 continue
             stat = path.stat()
             identity = (stat.st_dev, stat.st_ino)
@@ -422,7 +422,7 @@ def status() -> dict[str, Any]:
     elif not is_apple:
         message = "This MLX edition requires an Apple Silicon Mac."
     else:
-        message = "The one-time local model download needs about 29 GB."
+        message = "The one-time local model download needs about 55 GB."
     return {
         "engine_ready": ENGINE_ROOT.is_dir() and is_apple,
         "model_ready": ready,
